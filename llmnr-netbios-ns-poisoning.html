@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/page.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/phising.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/bind.png">
-<meta property="og:updated_time" content="2016-12-07T09:07:40.761Z">
+<meta property="og:updated_time" content="2016-12-07T19:54:18.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LLNMR, NetBIOS-NS Poisoning">
 <meta name="twitter:description" content="Yerel ağda hedefin veya hedeflerin trafiğini ele geçirmek ve müdahale etmek için birden fazla yöntem bulunmaktadır. Bunların arasında ARP Poisoning en bilineni olup, en fazla istismar edilenidir. TCP/">
@@ -195,7 +195,7 @@
 <p>WPAD aşağıdaki gibi çalışmaktadır;</p>
 <ol>
 <li>DHCP ayarları yapıldıysa istemci DHCP üzerinden WPAD bilgisini alır. (Başarılı ise 4. adıma geçilir.)</li>
-<li>DNS’e “wpad.<corpdomain>.com” sorulur. (Başarılı ise 4. adıma geçilir.)</corpdomain></li>
+<li>DNS’e “wpad.[corpdomain.com]” sorulur. (Başarılı ise 4. adıma geçilir.)</li>
 <li>WPAD için LLMNR sorgusu gönderilir. (Başarılı ise 4. adıma geçilir. Başarısız ise proxy kullanılmaz.)</li>
 <li>“wpad.dat” dosyası indirilir ve içerisinde bulunan proxy ayarları sistemde kullanılmaya başlanır.</li>
 </ol>
