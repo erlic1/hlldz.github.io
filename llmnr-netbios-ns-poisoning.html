@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Yerel ağda hedefin veya hedeflerin trafiğini ele geçirmek ve müdahale etmek için birden fazla yöntem bulunmaktadır. Bunların arasında ARP Poisoning en bilineni olup, en fazla istismar edilenidir. TCP/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LLNMR, NetBIOS-NS Poisoning">
+<meta property="og:title" content="LLMNR, NetBIOS-NS Poisoning">
 <meta property="og:url" content="https://artofpwn.com/llmnr-netbios-ns-poisoning.html">
 <meta property="og:site_name" content="with knowledge comes power">
 <meta property="og:description" content="Yerel ağda hedefin veya hedeflerin trafiğini ele geçirmek ve müdahale etmek için birden fazla yöntem bulunmaktadır. Bunların arasında ARP Poisoning en bilineni olup, en fazla istismar edilenidir. TCP/">
@@ -26,9 +26,9 @@
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/page.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/phising.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/bind.png">
-<meta property="og:updated_time" content="2016-12-07T19:54:18.231Z">
+<meta property="og:updated_time" content="2016-12-12T19:26:06.558Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LLNMR, NetBIOS-NS Poisoning">
+<meta name="twitter:title" content="LLMNR, NetBIOS-NS Poisoning">
 <meta name="twitter:description" content="Yerel ağda hedefin veya hedeflerin trafiğini ele geçirmek ve müdahale etmek için birden fazla yöntem bulunmaktadır. Bunların arasında ARP Poisoning en bilineni olup, en fazla istismar edilenidir. TCP/">
 <meta name="twitter:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/graph.png">
     
@@ -44,7 +44,7 @@
         
     
     <!-- title -->
-    <title>LLNMR, NetBIOS-NS Poisoning</title>
+    <title>LLMNR, NetBIOS-NS Poisoning</title>
     <!-- styles -->
     <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/lib/meslo-LG/styles.css">
@@ -90,15 +90,15 @@
     <div id="share" style="display: none">
       <ul>
         <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://artofpwn.com/llmnr-netbios-ns-poisoning.html"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="https://twitter.com/share?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&text=LLNMR, NetBIOS-NS Poisoning"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLNMR, NetBIOS-NS Poisoning"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&is_video=false&description=LLNMR, NetBIOS-NS Poisoning"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="mailto:?subject=LLNMR, NetBIOS-NS Poisoning&body=Check out this article: https://artofpwn.com/llmnr-netbios-ns-poisoning.html"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="https://getpocket.com/save?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLNMR, NetBIOS-NS Poisoning"><i class="fa fa-get-pocket" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://reddit.com/submit?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLNMR, NetBIOS-NS Poisoning"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLNMR, NetBIOS-NS Poisoning"><i class="fa fa-stumbleupon" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://digg.com/submit?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLNMR, NetBIOS-NS Poisoning"><i class="fa fa-digg" aria-hidden="true"></i></a></li>
-        <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&name=LLNMR, NetBIOS-NS Poisoning&description="><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://twitter.com/share?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&text=LLMNR, NetBIOS-NS Poisoning"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLMNR, NetBIOS-NS Poisoning"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&is_video=false&description=LLMNR, NetBIOS-NS Poisoning"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="mailto:?subject=LLMNR, NetBIOS-NS Poisoning&body=Check out this article: https://artofpwn.com/llmnr-netbios-ns-poisoning.html"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="https://getpocket.com/save?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLMNR, NetBIOS-NS Poisoning"><i class="fa fa-get-pocket" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://reddit.com/submit?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLMNR, NetBIOS-NS Poisoning"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLMNR, NetBIOS-NS Poisoning"><i class="fa fa-stumbleupon" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://digg.com/submit?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&title=LLMNR, NetBIOS-NS Poisoning"><i class="fa fa-digg" aria-hidden="true"></i></a></li>
+        <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://artofpwn.com/llmnr-netbios-ns-poisoning.html&name=LLMNR, NetBIOS-NS Poisoning&description="><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
       </ul>
     </div>
     <div id="toc">
@@ -114,7 +114,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        LLNMR, NetBIOS-NS Poisoning
+        LLMNR, NetBIOS-NS Poisoning
     </h1>
 
 
