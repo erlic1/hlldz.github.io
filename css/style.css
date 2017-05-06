@@ -455,19 +455,6 @@ body {
 .content {
   flex: 1;
 }
-.content p {
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-.content pre,
-.content code {
-  -moz-hyphens: manual;
-  -ms-hyphens: manual;
-  -webkit-hyphens: manual;
-  hyphens: manual;
-}
 .content a {
   text-decoration: none;
   color: #c9cacc;
