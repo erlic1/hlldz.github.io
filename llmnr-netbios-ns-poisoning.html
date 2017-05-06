@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/page.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/phising.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/bind.png">
-<meta property="og:updated_time" content="2017-05-06T14:20:09.695Z">
+<meta property="og:updated_time" content="2017-05-06T14:43:47.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LLMNR, NetBIOS-NS Poisoning">
 <meta name="twitter:description" content="Yerel ağda hedefin veya hedeflerin trafiğini ele geçirmek ve müdahale etmek için birden fazla yöntem bulunmaktadır. Bunların arasında ARP Poisoning en bilineni olup, en fazla istismar edilenidir. TCP/">
@@ -104,7 +104,7 @@
       </ul>
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LLMNR-Nedir"><span class="toc-number">1.</span> <span class="toc-text">LLMNR Nedir?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NetBIOS-Nedir"><span class="toc-number">2.</span> <span class="toc-text">NetBIOS Nedir?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Isletim-Sisteminde-Isler-Nasil-Yuruyor"><span class="toc-number">3.</span> <span class="toc-text">Windows İşletim Sisteminde İşler Nasıl Yürüyor?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hedefin-NTLMv2-Hash’ini-Ele-Gecirme"><span class="toc-number">4.</span> <span class="toc-text">Hedefin NTLMv2 Hash’ini Ele Geçirme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hedeften-Acik-Hesap-Bilgisi-Elde-Gecirme"><span class="toc-number">5.</span> <span class="toc-text">Hedeften Açık Hesap Bilgisi Elde Geçirme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hedefe-Arka-Kapi-Yerlestirme"><span class="toc-number">6.</span> <span class="toc-text">Hedefe Arka Kapı Yerleştirme</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LLMNR-Nedir"><span class="toc-number">1.</span> <span class="toc-text">LLMNR Nedir?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NetBIOS-Nedir"><span class="toc-number">2.</span> <span class="toc-text">NetBIOS Nedir?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows-Isletim-Sisteminde-Isler-Nasil-Yuruyor"><span class="toc-number">3.</span> <span class="toc-text">Windows İşletim Sisteminde İşler Nasıl Yürüyor?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hedefin-NTLMv2-Hash’ini-Ele-Gecirme"><span class="toc-number">4.</span> <span class="toc-text">Hedefin NTLMv2 Hash’ini Ele Geçirme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hedeften-Acik-Hesap-Bilgisi-Elde-Gecirme"><span class="toc-number">5.</span> <span class="toc-text">Hedeften Açık Hesap Bilgisi Elde Geçirme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hedefe-Arka-Kapi-Yerlestirme"><span class="toc-number">6.</span> <span class="toc-text">Hedefe Arka Kapı Yerleştirme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Referanslar"><span class="toc-number">7.</span> <span class="toc-text">Referanslar</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -223,8 +223,7 @@
 <p>Sayfada linki bulunan ProxyClient.exe dosyası hedef tarafından indirilip çalıştırıldığında TCP 140 portuna cmd.exe’yi bind edilecektir ve hedef üzerinde komut çalıştırılacak duruma geçilecektir.</p>
 <p>Hedef kullanıcılar tarayıcılarından nereye gitmek isterlerse karşılarına “/usr/share/responder/files/AccessDenied.html” dizin yolundaki dosya verilecektir ve ilgili HTML dosyası içerisinde erişim için “ProxyClient.exe” isimli dosyayı indirip çalıştırmaları istenmektedir. “ProxyClient.exe” dosyası “/usr/share/responder/files/BindShell.exe” dizini yolunda bulunmaktadır ve istenirse başka çalıştırılabilir dosyalarda oluşturulup ilgili dizine atıldıktan sonra yapılandırma dosyası güncellenirse  Responder aracı hedefe ilgili dosyayı verecektir.</p>
 <p><img src="/images/llmnr-netbios-ns-poisoning/bind.png" alt="İsteğin Zehirlenmesi ve Bind Shell’e Erişimi" title="İsteğin Zehirlenmesi ve Bind Shell’e Erişimi"> <div style="text-align: center;font-size: 12px;">İsteğin Zehirlenmesi ve Bind Shell’e Erişimi</div></p>
-<hr>
-<p><sup>1</sup> <a href="http://gs.statcounter.com/" target="_blank" rel="external">http://gs.statcounter.com/</a><br><sup>2</sup> <a href="https://lwn.net/Articles/609740/" target="_blank" rel="external">https://lwn.net/Articles/609740/</a></p>
+<h2 id="Referanslar"><a href="#Referanslar" class="headerlink" title="Referanslar"></a>Referanslar</h2><p><sup>1</sup> <a href="http://gs.statcounter.com/" target="_blank" rel="external">http://gs.statcounter.com/</a><br><sup>2</sup> <a href="https://lwn.net/Articles/609740/" target="_blank" rel="external">https://lwn.net/Articles/609740/</a></p>
 
   </div>
 </article>
