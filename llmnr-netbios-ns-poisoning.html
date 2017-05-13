@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/page.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/phising.png">
 <meta property="og:image" content="https://artofpwn.com/images/llmnr-netbios-ns-poisoning/bind.png">
-<meta property="og:updated_time" content="2017-05-06T14:46:12.417Z">
+<meta property="og:updated_time" content="2017-05-10T19:12:44.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LLMNR, NetBIOS-NS Poisoning">
 <meta name="twitter:description" content="Yerel ağda hedefin veya hedeflerin trafiğini ele geçirmek ve müdahale etmek için birden fazla yöntem bulunmaktadır. Bunların arasında ARP Poisoning en bilineni olup, en fazla istismar edilenidir. TCP/">
@@ -55,7 +55,8 @@
     
     <!-- jquery -->
     <script src="/lib/jquery/jquery.min.js"></script>
-</head>
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <body>
     
@@ -124,7 +125,7 @@
     <div class="meta">
       
     <div class="postdate">
-        <time datetime="2016-12-04T09:39:00.000Z" itemprop="datePublished">2016-12-04</time>
+        <time datetime="2016-12-04T09:39:00.000Z" itemprop="datePublished">04/12/2016</time>
     </div>
 
 
@@ -170,8 +171,9 @@
 <p>İşte tam bu noktada bu isteklere saldırgan olarak cevap verebilir ve hedef sistem ile ilgili hassas verilere erişebilir, başka bir yere yönlendirebilir hatta hedefe arka kapı bile yerleştirilebilir. Temelde yapılacak olan şey broadcast gelen paketleri dinlemek ve onlara gerektiği şekilde cevap vermektedir.</p>
 <p>Bu işlemler için Kali işletim sisteminde kurulu olarak gelen veya GitHub üzerinden erişlebilecek (<a href="https://github.com/SpiderLabs/Responder" target="_blank" rel="external">https://github.com/SpiderLabs/Responder</a>), açık kaynak kodlu Responder isimli araç yazı içerisinde kullanılmıştır.</p>
 <h2 id="Hedefin-NTLMv2-Hash’ini-Ele-Gecirme"><a href="#Hedefin-NTLMv2-Hash’ini-Ele-Gecirme" class="headerlink" title="Hedefin NTLMv2 Hash’ini Ele Geçirme"></a>Hedefin NTLMv2 Hash’ini Ele Geçirme</h2><p>Araca herhangi bir parametre vermeden direkt olarak ağ arayüzünü tanımlayarak çalıştırdığımızda gelecek olan LLNMR ve NetBIOS-NS isteklerini dinlemeye başlayacaktır.</p>
-<pre><code>$ responder -I eth0
-</code></pre><p>Örnek vererek ilerlersek;</p>
+<pre class="line-numbers language-text"><code class="language-text">responder -I eth0
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Örnek vererek ilerlersek;</p>
 <ul>
 <li><p>Kullanıcı aslında \\fileserver\’a erişmek istiyor ancak yanlış yazıp \\filserver\ şeklinde yazarak erişmeye çalışıyor.</p>
 </li>
@@ -193,7 +195,10 @@
 <p><img src="/images/llmnr-netbios-ns-poisoning/hash.png" alt="İsteğin Zehirlenmesi ve NTLMv2 Hash’in Elde Edilmesi" title="İsteğin Zehirlenmesi ve NTLMv2 Hash’in Elde Edilmesi"> <div style="text-align: center;font-size: 12px;">İsteğin Zehirlenmesi ve NTLMv2 Hash’in Elde Edilmesi</div></p>
 <p>Bu noktadan sonra saldırgan hedeften elde ettiği NTLMv2 hashi kırarak diğer saldırı aşamalarına geçilebilir. Çünkü NTLMv2 hash’i Pass The Hash vb. herhangi bir yöntem için kullanılamamaktadır.</p>
 <h2 id="Hedeften-Acik-Hesap-Bilgisi-Elde-Gecirme"><a href="#Hedeften-Acik-Hesap-Bilgisi-Elde-Gecirme" class="headerlink" title="Hedeften Açık Hesap Bilgisi Elde Geçirme"></a>Hedeften Açık Hesap Bilgisi Elde Geçirme</h2><p>WPAD (Web Proxy Auto-Discovery Protocol), yerel ağ içerisinde veya internete erişim için proxy ayarının gerektiği durumlarda, proxy ayarlarının otomatik olarak istemcilere gönderilmesi ve işletilmesi için kullanılan teknolojidir. Proxy adres veya adresleri “wpad.dat” dosyası içerisine eklenir ve istemcilere DHCP veya DNS üzerinden almaları sağlanabilir. Örnek wpad.dat içeriği aşağıda verilmiştir.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function FindProxyForURL(url, host)</div><div class="line">&#123;</div><div class="line">	return &quot;PROXY proxy.example.com:8080; DIRECT&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">FindProxyForURL</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> host<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">"PROXY proxy.example.com:8080; DIRECT"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>WPAD aşağıdaki gibi çalışmaktadır;</p>
 <ol>
 <li>DHCP ayarları yapıldıysa istemci DHCP üzerinden WPAD bilgisini alır. (Başarılı ise 4. adıma geçilir.)</li>
@@ -207,18 +212,31 @@
 <p>Bu saldırı türünde saldırganın avantajı olan bir durum söz konusu; Windows işletim sisteminin temel tarayıcısı Internet Explorer’ın proxy ayarları varsayılan olarak kurumla beraber “Automatically detect settings” şeklindedir.<br>Aynı zamanda Mozilla Firefox tarayıcısının proxy ayarları varsayılan olarak kurulum ile beraber “Use system proxy settings” şeklinde olup Chrome tarayıcısı da Internet Explorer üzerinden yapılan proxy ayarlarını kullanmaktadır.</p>
 <p><img src="/images/llmnr-netbios-ns-poisoning/browsers.png" alt="Internet Explorer ve Mozilla Firefox Proxy Ayarları" title="Internet Explorer ve Mozilla Firefox Proxy Ayarları"> <div style="text-align: center;font-size: 12px;">Internet Explorer ve Mozilla Firefox Proxy Ayarları</div></p>
 <p>Saldırı için kullanılacak araç olan Responder aşağıdaki parametreler için çalıştırıldığında kendisine gelen WPAD paketlerine cevap dönecektir ve döneceği cevap proxy için yetkilendirmenin (Basic Authentication) gerektiği anlamına gelecektir.</p>
-<pre><code>$ responder -I eth0 -wFb
-</code></pre><p>Kullanıcı tarafında kullanıcı adı ve parola girilmesi için bir ekran çıkacaktır. Bu aşamada kullanıcının gireceği değerleri açık (clear-text) olarak saldırgan ele geçecektir ve genelde saldırıya maruz kalan kullanıcılar Windows kullanıcı hesaplarının bilgilerini girmektedir.</p>
+<pre class="line-numbers language-text"><code class="language-text">responder -I eth0 -wFb
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Kullanıcı tarafında kullanıcı adı ve parola girilmesi için bir ekran çıkacaktır. Bu aşamada kullanıcının gireceği değerleri açık (clear-text) olarak saldırgan ele geçecektir ve genelde saldırıya maruz kalan kullanıcılar Windows kullanıcı hesaplarının bilgilerini girmektedir.</p>
 <p><img src="/images/llmnr-netbios-ns-poisoning/basicauth.png" alt="Karşılaşılan Basic Authentication Penceresi" title="Karşılaşılan Basic Authentication Penceresi"> <div style="text-align: center;font-size: 12px;">Karşılaşılan Basic Authentication Penceresi</div></p>
 <p><img src="/images/llmnr-netbios-ns-poisoning/wpad-basic-auth.png" alt="WPAD.DAT Dosyasına Erişim İsteği ve Cevabı" title="WPAD.DAT Dosyasına Erişim İsteği ve Cevabı"> <div style="text-align: center;font-size: 12px;">WPAD.DAT Dosyasına Erişim İsteği ve Cevabı</div></p>
 <p><img src="/images/llmnr-netbios-ns-poisoning/wpad-clear-text.png" alt="İsteğin Zehirlenmesi ve ClearText Hesap Bilgisinin Elde Edilmesi" title="İsteğin Zehirlenmesi ve ClearText Hesap Bilgisinin Elde Edilmesi"> <div style="text-align: center;font-size: 12px;">İsteğin Zehirlenmesi ve ClearText Hesap Bilgisinin Elde Edilmesi</div></p>
 <h2 id="Hedefe-Arka-Kapi-Yerlestirme"><a href="#Hedefe-Arka-Kapi-Yerlestirme" class="headerlink" title="Hedefe Arka Kapı Yerleştirme"></a>Hedefe Arka Kapı Yerleştirme</h2><p>Yukarıda WPAD isteklerine cevap dönerek hedeften açık (clear-text) olarak hesap bilgisinin nasıl alınabileceğine değinmiştim. Bu durumu bir adım öteye taşıyarak kullanıcının oluşturduğu isteği belirli bir sayfaya yönlendirerek kullanıcıya çalıştırılabilir dosya indirmesini sağlayabiliriz. Bu noktada oluşturulacak sayfanın inandırıcılığı için biraz sosyal mühendislik becerisi gerekmektedir ancak Responder aracının içerisindeki varsayılan sayfa bu işlem için gayet başarılıdır.</p>
 <p><img src="/images/llmnr-netbios-ns-poisoning/page.png" alt="Varsayılan Phising Sayfası" title="Varsayılan Phising Sayfası"> <div style="text-align: center;font-size: 12px;">Varsayılan Phising Sayfası</div></p>
 <p>Responder aracının “/etc/responder/Responder.conf” dosyası içerisinde aracın yapılandırma parametreleri bulunmaktadır. Dosya içerisinde “Serve-Html” ve “Serve-EXE” parametreleri varsayılan olarak “Off” değerindedir. Öncelikle bu değerleri “On” olarak değiştirmemiz gerekmektedir.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[HTTP Server]</div><div class="line"></div><div class="line">; Set to On to always serve the custom EXE</div><div class="line">Serve-Always = On</div><div class="line"></div><div class="line">; Set to On to replace any requested .exe with the custom EXE</div><div class="line">Serve-Exe = On</div><div class="line"></div><div class="line">; Set to On to serve the custom HTML if the URL does not contain .exe</div><div class="line">; Set to Off to inject the &apos;HTMLToInject&apos; in web pages instead</div><div class="line">Serve-Html = On</div></pre></td></tr></table></figure>
+<pre class="line-numbers language-text"><code class="language-text">[HTTP Server]
+
+; Set to On to always serve the custom EXE
+Serve-Always = On
+
+; Set to On to replace any requested .exe with the custom EXE
+Serve-Exe = On
+
+; Set to On to serve the custom HTML if the URL does not contain .exe
+; Set to Off to inject the 'HTMLToInject' in web pages instead
+Serve-Html = On
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Ayarlar tamamlandıktan sonra Responder aracı aşağıdaki parametreler ile çalıştırıldığında gelen WPAD isteklerine cevap dönecektir ve cevapları işleyen istemciler saldırıya maruz kalacaklardır.</p>
-<pre><code>$ responder -I eth0 -wr
-</code></pre><p>Saldırıya maruz kalan kullanıcılar aşağıdaki ekran görüntüsünde olan sayfa ile karşılaşacaklardır.</p>
+<pre class="line-numbers language-text"><code class="language-text">responder -I eth0 -wr
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Saldırıya maruz kalan kullanıcılar aşağıdaki ekran görüntüsünde olan sayfa ile karşılaşacaklardır.</p>
 <p><img src="/images/llmnr-netbios-ns-poisoning/phising.png" alt="Karşılaşılan Sayfa ve Payload’ın İndirilmesi" title="Karşılaşılan Sayfa ve Payload’ın İndirilmesi"> <div style="text-align: center;font-size: 12px;">Karşılaşılan Sayfa ve Payload’ın İndirilmesi</div></p>
 <p>Sayfada linki bulunan ProxyClient.exe dosyası hedef tarafından indirilip çalıştırıldığında TCP 140 portuna cmd.exe’yi bind edilecektir ve hedef üzerinde komut çalıştırılacak duruma geçilecektir.</p>
 <p>Hedef kullanıcılar tarayıcılarından nereye gitmek isterlerse karşılarına “/usr/share/responder/files/AccessDenied.html” dizin yolundaki dosya verilecektir ve ilgili HTML dosyası içerisinde erişim için “ProxyClient.exe” isimli dosyayı indirip çalıştırmaları istenmektedir. “ProxyClient.exe” dosyası “/usr/share/responder/files/BindShell.exe” dizini yolunda bulunmaktadır ve istenirse başka çalıştırılabilir dosyalarda oluşturulup ilgili dizine atıldıktan sonra yapılandırma dosyası güncellenirse  Responder aracı hedefe ilgili dosyayı verecektir.</p>
