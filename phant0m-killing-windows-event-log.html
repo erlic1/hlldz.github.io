@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Phant0m is a Powershell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting">
+    <meta name="description" content="Phant0m is a PowerShell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Phant0m: Killing Windows Event Log">
 <meta property="og:url" content="https://artofpwn.com/phant0m-killing-windows-event-log.html">
 <meta property="og:site_name" content="with knowledge comes power">
-<meta property="og:description" content="Phant0m is a Powershell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting">
+<meta property="og:description" content="Phant0m is a PowerShell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting">
 <meta property="og:image" content="https://artofpwn.com/images/phant0m/svchost.png">
 <meta property="og:image" content="https://artofpwn.com/images/phant0m/phant0m.jpg">
-<meta property="og:updated_time" content="2017-05-24T13:53:59.199Z">
+<meta property="og:updated_time" content="2017-07-31T13:46:13.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phant0m: Killing Windows Event Log">
-<meta name="twitter:description" content="Phant0m is a Powershell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting">
+<meta name="twitter:description" content="Phant0m is a PowerShell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting">
 <meta name="twitter:image" content="https://artofpwn.com/images/phant0m/svchost.png">
     
     
@@ -135,7 +135,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>Phant0m is a Powershell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting Event Log Service first of all, let’s remember how services working on Windows operating system. When you look at the task manager, you see a lot of svchost.exe. If we are interested in Windows’ own services, we need to know how svchost.exe works and why?</p>
+    <p>Phant0m is a PowerShell script and targets the Windows Event Log Service in Windows operating system. Because the most traces of a possible attack remain in the operating system logs. If we targeting Event Log Service first of all, let’s remember how services working on Windows operating system. When you look at the task manager, you see a lot of svchost.exe. If we are interested in Windows’ own services, we need to know how svchost.exe works and why?</p>
 <p><img src="/images/phant0m/svchost.png" alt="Svchost" title="Svchost"></p>
 <p>Svchost is essential in the implementation of so-called shared service processes, where a number of services can share a process in order to reduce resource consumption. Grouping multiple services into a single process conserves computing resources, and this consideration was of particular concern to NT designers because creating Windows processes takes more time and consumes more memory than in other operating systems, e.g. in the Unix family.<sup>1</sup> This means briefly that; On Windows operating systems, svchost.exe manages the services and services are actually running under svchost.exe’s as threads.</p>
 <p>P.S: If you want to get more detailed information about the threads I would recommend you to read this, <a href="https://www.microsoftpressstore.com/articles/article.aspx?p=2233328" target="_blank" rel="external">Processes, Threads, and Jobs in the Windows Operating System</a>.</p>
