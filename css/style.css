@@ -323,7 +323,6 @@
   font-style: normal;
   font-weight: 700;
   color: #2bbc8a;
-  margin-top: 3rem;
   margin-bottom: 1rem;
   display: block;
   -moz-osx-font-smoothing: grayscale;
@@ -336,7 +335,6 @@
   font-weight: bold;
   text-transform: none;
   letter-spacing: normal;
-  margin-top: 2rem;
   margin-bottom: 0.5rem;
   color: #eee;
   display: block;
@@ -519,7 +517,7 @@ body {
 }
 .width {
   width: 100%;
-  max-width: 39rem;
+  max-width: 46rem;
 }
 @media (max-width: 480px) {
   .px3 {
